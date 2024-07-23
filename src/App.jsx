@@ -1,10 +1,10 @@
-import Connet4Grid from "./Connet4Grid"
+import Connect4Grid from "./Connect4Grid"
 
 function App() {
   
   return (
     <>
-    <Connet4Grid />
+    <Connect4Grid />
     </>
 
   )

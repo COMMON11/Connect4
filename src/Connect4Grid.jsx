@@ -4,7 +4,7 @@ import RedChip from './assets/Red_chip.svg'
 import TransparentChip from './assets/Transparent_chip.svg';
 import { useState, useEffect } from 'react';
 
-function Connet4Grid() {
+function Connect4Grid() {
 
     const [turn, setTurn] = useState("P1")
 
@@ -89,4 +89,4 @@ function Connet4Grid() {
     );
 }
 
-export default Connet4Grid
+export default Connect4Grid

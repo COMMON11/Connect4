@@ -6,6 +6,3 @@ body {
     @apply bg-slate-900;
 }
 
-.second-flex {
-    @apply flex w-full h-[50%] justify-center border-purple-800 border-4 border-dotted p-12;
-}
