@@ -3,8 +3,6 @@
 <circle cx="90" cy="90" r="90" fill="#797979"/>
 </mask>
 <g mask="url(#mask0_1_6)">
-<circle cx="90" cy="90" r="90" fill="#D9D900"/>
-<circle cx="90" cy="90" r="70" fill="#EEEE00"/>
-<path d="M185 49L352.143 196H17.8571L185 49Z" fill="black" fill-opacity="0.3"/>
+<circle cx="90" cy="90" r="70" fill="#EE0000" fill-opacity="0.01"/>
 </g>
 </svg>

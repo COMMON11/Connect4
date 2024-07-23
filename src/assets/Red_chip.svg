@@ -4,7 +4,7 @@
 </mask>
 <g mask="url(#mask0_1_6)">
 <circle cx="90" cy="90" r="90" fill="#D90000"/>
-<circle cx="90" cy="90" r="80" fill="#EE0000"/>
+<circle cx="90" cy="90" r="70" fill="#EE0000"/>
 <path d="M185 49L352.143 196H17.8571L185 49Z" fill="black" fill-opacity="0.3"/>
 </g>
 </svg>
