@@ -164,6 +164,7 @@ function Connect4Grid() {
   return (
     <>
       <div className="grid grid-rows-1 grid-cols-7 w-[600px] h-[100px]  p-2">
+        <div className="col-span-7 z-[-1]"></div>
         {new Array(7).fill().map((_, i) => (
           <button
             key={i}
