@@ -6,12 +6,17 @@ import Trans_Red_chip from "./assets/Trans_Red_chip.svg";
 import Trans_Yellow_chip from "./assets/Trans_Yellow_chip.svg";
 
 import { useState, useEffect } from "react";
+import checkWinCondition from "./CheckWinCondition.jsx";
+import WinnerPopup from "./WinnerPopUp.jsx";
 
-function Connect4Grid() {
+function Connect4Grid({ onWin, onReset }) {
   const [turn, setTurn] = useState("P1");
 
   const [chip, setChip] = useState(new Array(7).fill(TransparentChip));
   const [board, setBoard] = useState([]);
+
+  const [winCondition, setWinCondition] = useState(false);
+  const [winner, setWinner] = useState("");
 
   //* initialize blank board
   useEffect(() => {
@@ -62,7 +67,17 @@ function Connect4Grid() {
     }
   };
 
-  const handleClick = (index) => {
+  const handleNewGame = () => {
+    const newBoard = board.map((row) =>
+      row.map((cell) => ({ ...cell, value: Blank }))
+    );
+    setBoard(newBoard);
+    setWinCondition(false);
+    setTurn("P1");
+    setWinner(null);
+  };
+
+  async function handleClick(index) {
     const chipColour = turn === "P1" ? RedChip : YellowChip;
     const TransChipColour = turn === "P1" ? Trans_Yellow_chip : Trans_Red_chip;
 
@@ -72,10 +87,12 @@ function Connect4Grid() {
         board[i][index].value === Trans_Yellow_chip
       ) {
         updateBoardValue(i, index, chipColour);
+        const isWin = checkWinCondition(board, i, index);
+        setWinCondition(isWin);
 
-        if (checkWinCondition(i, index)) {
-          alert(`${turn} wins!`);
-          return;
+        if (isWin) {
+          setWinner(turn);
+          onWin(turn);
         }
 
         setTurn((prevTurn) => (prevTurn === "P1" ? "P2" : "P1"));
@@ -90,96 +107,48 @@ function Connect4Grid() {
         break;
       }
     }
-  };
-
-  const checkWinCondition = (row, col) => {
-    const currentChip = board[row][col].value;
-
-    // Check horizontal line
-    let count = 1;
-    for (let j = col - 1; j >= 0 && board[row][j].value === currentChip; j--) {
-      count++;
-    }
-    for (let j = col + 1; j < 7 && board[row][j].value === currentChip; j++) {
-      count++;
-    }
-    if (count >= 4) {
-      return true;
-    }
-
-    // Check vertical line
-    count = 1;
-    for (let i = row - 1; i >= 0 && board[i][col].value === currentChip; i--) {
-      count++;
-    }
-    for (let i = row + 1; i < 6 && board[i][col].value === currentChip; i++) {
-      count++;
-    }
-    if (count >= 4) {
-      return true;
-    }
-
-    // Check diagonal lines (top-left to bottom-right and top-right to bottom-left)
-    count = 1;
-    for (
-      let i = row - 1, j = col - 1;
-      i >= 0 && j >= 0 && board[i][j].value === currentChip;
-      i--, j--
-    ) {
-      count++;
-    }
-    for (
-      let i = row + 1, j = col + 1;
-      i < 6 && j < 7 && board[i][j].value === currentChip;
-      i++, j++
-    ) {
-      count++;
-    }
-    if (count >= 4) {
-      return true;
-    }
-
-    count = 1;
-    for (
-      let i = row - 1, j = col + 1;
-      i >= 0 && j < 7 && board[i][j].value === currentChip;
-      i--, j++
-    ) {
-      count++;
-    }
-    for (
-      let i = row + 1, j = col - 1;
-      i < 6 && j >= 0 && board[i][j].value === currentChip;
-      i++, j--
-    ) {
-      count++;
-    }
-    if (count >= 4) {
-      return true;
-    }
-
-    return false;
-  };
+  }
 
   return (
     <>
-      <div className="grid grid-rows-1 grid-cols-7 w-[600px] h-[100px]  p-2">
-        <div className="col-span-7 z-[-1]"></div>
-        {new Array(7).fill().map((_, i) => (
-          <button
-            key={i}
-            onMouseEnter={() => handleMouseEnter(i)}
-            onMouseLeave={() => handleMouseLeave(i)}
-            onClick={() => handleClick(i)}
-          >
-            <img src={chip[i]} alt={`chip-${i}`} />
-          </button>
-        ))}
+      {winner && <WinnerPopup winner={winner} onClose={handleNewGame} />}
+      <p className="text-2xl text-center text-white">
+        Place Mouse inside to Place Chips 👇
+      </p>
+      <div className="w-[600px] h-[100px] border-gray-600 border-dashed rounded-xl mb-2 border-4">
+        {!winCondition && (
+          <div className="grid grid-rows-1 grid-cols-7 w-[600px] h-[100px]  p-2  ">
+            {new Array(7).fill().map((_, i) => (
+              <button
+                key={i}
+                onMouseEnter={() => handleMouseEnter(i)}
+                onMouseLeave={() => handleMouseLeave(i)}
+                onClick={() => handleClick(i)}
+              >
+                <img src={chip[i]} alt={`chip-${i}`} />
+              </button>
+            ))}
+          </div>
+        )}
       </div>
       <div className="w-[600px] h-[520px] grid grid-rows-6 grid-cols-7 gap-2 bg-sky-700 p-2 rounded-lg shadow-2xl outline-8 outline-sky-900 outline-none outline-offset-0">
         {board.flat().map((item) => (
           <img src={item.value} key={item.id} alt={item.id} />
         ))}
+      </div>
+      <div className="w-full flex justify-center">
+        <button
+          onClick={handleNewGame}
+          className="bg-blue-500 text-white font-bold py-2 px-4 rounded mt-4 mr-4"
+        >
+          New Game
+        </button>
+        <button
+          onClick={onReset}
+          className="bg-blue-500 text-white font-bold py-2 px-4 rounded mt-4"
+        >
+          Reset Score
+        </button>
       </div>
     </>
   );
