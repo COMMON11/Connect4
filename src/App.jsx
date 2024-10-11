@@ -16,7 +16,6 @@ function App() {
 
   // Function to handle reset
   const handleReset = () => {
-    console.log("handleReset called");
     setPlayer1Score(0);
     setPlayer2Score(0);
   };

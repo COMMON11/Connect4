@@ -1,4 +1,3 @@
-// src/WinnerPopup.jsx
 import React, { useState, useEffect } from "react";
 
 function WinnerPopup({ winner, onClose }) {
