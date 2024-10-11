@@ -75,6 +75,7 @@ function Connect4Grid({ onWin, onReset }) {
     setWinCondition(false);
     setTurn("P1");
     setWinner(null);
+    setChip(new Array(7).fill(TransparentChip));
   };
 
   async function handleClick(index) {
