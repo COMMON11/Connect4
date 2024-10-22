@@ -1,6 +1,6 @@
 # Connect 4 game
 
-check out the project at 👉 [Link](https://common11.github.io/Connect4/)
+check out the project at 👉 [https://common11.github.io/Connect4/](https://common11.github.io/Connect4/)
 
 ## Explanation
 
