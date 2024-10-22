@@ -55,9 +55,6 @@ function App() {
           </div>
         </aside>
       </div>
-      <footer className="text-white font-bold text-center text-2xl">
-        Made by: Paras Katekar
-      </footer>
     </>
   );
 }
