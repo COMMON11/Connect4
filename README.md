@@ -41,8 +41,10 @@ return(
 
 Output generated with styling:
 
-![Image](/public/board.png)
-
+<p align="center">
+<img src="/public/board.png" width="450" height="400">
+<p>
+  
 ### Inserting chips
 
 An array of 7 elements of buttons is used to represent each column in which chips can be placed.
@@ -126,7 +128,9 @@ const handleMouseLeave = (index) => {
 
 Examples of hovering mouse on button:
 
-![Imange](/public/hoverChipEx1.png){width=250} ![Imange](/public/hoverChipEx2.png){width=250}
+<p align="center">
+<img src="/public/hoverChipEx1.png" width="300" height="800"> &nbsp; &nbsp; <img src="/public/hoverChipEx2.png" width="300" height="800">
+</p>
 
 **onClick**:
 We already have know which **column** the chip is to be placed as the **index** of the button that is pressed gives us that information.
