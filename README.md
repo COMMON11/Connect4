@@ -126,7 +126,7 @@ const handleMouseLeave = (index) => {
 
 Examples of hovering mouse on button:
 
-![Imange](/public/hoverChipEx1.png){width=250}{height=500} ![Imange](/public/hoverChipEx2.png){width=250}{height=500}
+![Imange](/public/hoverChipEx1.png){width=250} ![Imange](/public/hoverChipEx2.png){width=250}
 
 **onClick**:
 We already have know which **column** the chip is to be placed as the **index** of the button that is pressed gives us that information.
